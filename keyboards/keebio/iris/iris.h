@@ -10,6 +10,8 @@
     #include "rev3.h"
 #elif KEYBOARD_keebio_iris_rev4
     #include "rev4.h"
+#elif KEYBOARD_keebio_iris_handwire
+    #include "handwire.h"
 #endif
 
 #include "quantum.h"
