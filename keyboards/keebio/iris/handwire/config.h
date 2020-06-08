@@ -49,8 +49,10 @@ SCL  D0 |        | F5
      B5 +--------+ B6
 
 */
-#define MATRIX_ROW_PINS       { B1, F7, F6, F5, F4 }
-#define MATRIX_COL_PINS       { B3, B2, B6, E6, B4, B5 }
+#define MATRIX_ROW_PINS        { B1, F7, F6, F5, F4 }
+#define MATRIX_COL_PINS        { B3, B2, B6, E6, B4, B5 }
+#define MATRIX_ROW_PINS_RIGHT  { B1, F7, F6, F5, F4 }
+#define MATRIX_COL_PINS_RIGHT  { B3, B2, B6, E6, B4, B5 }
 //#define SPLIT_HAND_PIN D5
 //#define QMK_ESC_OUTPUT F1
 //#define QMK_ESC_INPUT B1
@@ -95,5 +97,5 @@ SCL  D0 |        | F5
 //#define RGBLED_SPLIT { 6, 6 }
 //#define RGBLIGHT_ANIMATIONS
 
-#define SPLIT_USB_DETECT
-#define SPLIT_USB_TIMEOUT 2000
+//#define SPLIT_USB_DETECT
+//#define SPLIT_USB_TIMEOUT 2000
