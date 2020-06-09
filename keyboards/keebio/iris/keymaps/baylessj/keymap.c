@@ -18,22 +18,27 @@ enum custom_keycodes {
    M_ARROW_LEQL,
    M_ARROW_REQL,
    M_ARROW_RMINUS,
-   M_ARROW_LMINUS
+   M_ARROW_LMINUS,
+   M_LCURL,
+   M_RCURL,
+   M_LPRN,
+   M_RPRN
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+  // The LCPO and RAPC keys are part of the "Space Cadet Shift" keyset where the keys act as Ctrl/Alt when held or parenthesis when tapped
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
+     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,                               KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
+     KC_GESC, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      MO(1),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                               KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
+     KC_LCPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                               KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RAPC,
   //└────────┴────────┴────────┴────────┴────────┴────────┴                          ├────────┼────────┼────────┼────────┼────────┴────────┘
-                       KC_LSFT, KC_SPC,  KC_BSPC, MO(2),                              KC_LGUI, KC_TAB,  KC_ENT,  KC_RALT
+                       MO(2),   KC_LSFT, KC_SPC,  KC_BSPC,                            KC_LGUI, KC_TAB,  KC_ENT,  KC_RALT
                    // └────────┴────────┴────────┘────────┘                          └────────┴────────┴────────┴────────┘
   ),
 
@@ -41,13 +46,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_TILD, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   M_ARROW_REQL,                  M_ARROW_LEQL, KC_NO,   KC_UP,   KC_NO,   KC_NO,   KC_DEL,
+     KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC,                            KC_RBRC, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   M_ARROW_RMINUS,              M_ARROW_LMINUS, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_NO,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, M_LPRN,                             M_RPRN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, KC_NO,   KC_NO,   KC_NO,   KC_NO,   M_BRACKET_IN_ANG,         M_BRACKET_OUT_ANG, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_F12,
+     KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, M_LCURL,                            M_RCURL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_F12,
   //└────────┴────────┴────────┴────────┴────────┴────────┴                          ├────────┼────────┼────────┼────────┼────────┴────────┘
-                       KC_NO,   KC_NO,   KC_NO,   KC_DEL,                             KC_NO,   KC_NO,   KC_NO,   KC_NO
+                       XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                    // └────────┴────────┴────────┘────────┘                          └────────┴────────┴────────┴────────┘
   ),
 
@@ -55,13 +60,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_TILD, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC,  KC_NO,   KC_NO,   KC_MS_U, KC_NO,   KC_NO,                              KC_NO,   KC_7,    KC_8,    KC_9,    KC_NO,   KC_NO,
+     KC_ESC,  XXXXXXX, XXXXXXX, KC_MS_U, XXXXXXX, KC_LBRC,                            KC_RBRC, KC_7,    KC_8,    KC_9,    XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_NO,   KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,                              KC_NO,   KC_4,    KC_5,    KC_6,    KC_NO,   KC_NO,
+     XXXXXXX, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, M_LCURL,                            M_RCURL, KC_4,    KC_5,    KC_6,    XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, KC_NO,   KC_BTN2, KC_BTN3, KC_BTN1, KC_NO,                              KC_NO,   KC_1,    KC_2,    KC_3,    KC_NO,   KC_F12,
+     KC_LCTL, XXXXXXX, KC_BTN2, KC_BTN3, KC_BTN1, XXXXXXX,                            XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX,   KC_F12,
   //└────────┴────────┴────────┴────────┴────────┴────────┴                          ├────────┼────────┼────────┼────────┼────────┴────────┘
-                       KC_NO,   KC_NO,   KC_NO,   KC_DEL,                             KC_NO,   KC_NO,   KC_0,   KC_NO
+                       XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,                             XXXXXXX, XXXXXXX, KC_0,    XXXXXXX
                    // └────────┴────────┴────────┘────────┘                          └────────┴────────┴────────┴────────┘
   ),
 };
@@ -104,19 +109,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;                                                           
       }                                                                         
       break; 
-   case M_BRACKET_OUT_ANG:  /* >< */                                           
+    case M_BRACKET_OUT_ANG:  /* >< */                                           
       if (record->event.pressed) {                                              
         SEND_STRING("><" SS_TAP(X_LEFT));                                       
         return false;                                                           
       }                                                                         
       break;                                                                    
-   case M_ARROW_LMINUS:  /* <- */                                              
+    case M_ARROW_LMINUS:  /* <- */                                              
       if (record->event.pressed) {                                              
         SEND_STRING("<-");                                                      
         return false;                                                           
       }                                                                         
       break;                                                                    
-   case M_ARROW_RMINUS:  /* -> */                                              
+    case M_ARROW_RMINUS:  /* -> */                                              
       if (record->event.pressed) {                                              
         SEND_STRING("->");                                                      
         return false;                                                           
@@ -127,12 +132,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("<=");                                                      
         return false;                                                           
       }                                                                         
-     break;                                                                    
-   case M_ARROW_REQL:  /* => */                                                
+      break;                                                                    
+    case M_ARROW_REQL:  /* => */                                                
       if (record->event.pressed) {                                              
         SEND_STRING("=>");                                                      
         return false;                                                           
       }                                                                         
+      break;
+    case M_LCURL:
+      if (record->event.pressed) {
+        SEND_STRING("{");
+        return false;
+      }
+      break;
+    case M_RCURL:
+      if (record->event.pressed) {
+        SEND_STRING("}");
+        return false;
+      }
+      break; 
+    case M_LPRN:
+      if (record->event.pressed) {
+        SEND_STRING("(");
+        return false; 
+      }
+      break;
+    case M_RPRN:
+      if (record->event.pressed) {
+        SEND_STRING(")");
+        return false;
+      }
       break;
   }
   return true;
