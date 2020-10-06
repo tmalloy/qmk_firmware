@@ -4,6 +4,7 @@
  */
 
 #include "gergoplex.h"
+#include "g/keymap_combo.h"
 
 enum {
     _ALPHA,   // default
@@ -14,14 +15,14 @@ enum {
 #define KC_XXXXX   KC_NO
 #define KC_ALT_Q   MT(MOD_LALT, KC_Q)
 #define KC_L1_A    LT(_SPECIAL, KC_A)
-#define KC_CTL_Z   MT(MOD_LCTL, KC_Z)
 #define KC_L2_S    LT(_NUMBERS, KC_S)
 #define KC_L2      MO(_NUMBERS)
-#define KC_CTL_CL  MT(MOD_LCTL, KC_SCLN)
+#define KC_CTL_CL  MT(MOD_RCTL, KC_SCLN)
 #define KC_LBRKT   LSFT(KC_LBRC)        // {
 #define KC_RBRKT   LSFT(KC_RBRC)        // }
 #define KC_C_A_D   LCA(KC_DEL)          // Ctrl + Alt + Del
 // TODO: add another layer entrypoint for CTRL+ALT+L1 to do multi-cursors in vscode?
+#define KC_CMB_TOG CMB_TOG  // A hack to allow KC_-less keycode along with KC_-ful ones
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -32,10 +33,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
      * | L1_A  | L2_S|  D  |  F  |  G  |      |  H  |  J  |  K  |  L  |CTRL ; |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * | CTL_Z |SUP_X|  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |   /   |
+     * |   Z   |SUP_X|  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |   /   |
      * `-------------------------------'      `-------------------------------'
      *               .-----------------.      .-----------------.
-     *               | LSFT| SPC | BSPC|      | ENTR| TAB |SUPER|
+     *               | LCTL| SPC | SFT |      | ENTR| TAB |SUPER|
      *               '-----------------'      '-----------------'
      */
     [_ALPHA] = LAYOUT_kc(
@@ -44,10 +45,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          L1_A  , L2_S,  D  ,  F  ,  G  ,         H  ,  J  ,  K  ,  L  , CTL_CL,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------| 
-         CTL_Z ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT , SLSH  ,
+           Z   ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT , SLSH  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                       LSFT, SPC , BSPC,        TAB , ENT ,LGUI),
+                       LCTL, SPC , LSFT,        TAB , ENT ,LGUI),
     //               '-----------------'      '-----------------'
 
 
@@ -73,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          XXXXX , EXLM,  AT , HASH, LBRC,       RBRC ,XXXXX,XXXXX,XXXXX,  EQL  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                       LSFT, SPC , DEL ,        TAB , ENT ,LGUI),
+                       LCTL, SPC , LSFT,        TAB , ENT ,LGUI),
     //               '-----------------'      '-----------------'
 
     /* Keymap 2: Numbers/Function/Motion layer
@@ -98,6 +99,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,         0  ,  1  ,  2  ,  3  ,  ENT  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                       LSFT, SPC , DEL ,        TAB , ENT ,LGUI),
+                       LCTL, SPC , LSFT,        TAB , ENT ,LGUI),
     //               '-----------------'      '-----------------'
 };
