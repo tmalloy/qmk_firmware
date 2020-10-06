@@ -4,8 +4,6 @@
  */
 
 #include "gergoplex.h"
-#include "g/keymap_combo.h"
-
 
 enum {
     _ALPHA,   // default
@@ -13,106 +11,93 @@ enum {
     _NUMBERS  // numbers/function/motion
 };
 
-#define KC_CTL_A  MT(MOD_LCTL, KC_A)     // Tap for A, hold for Control
-#define KC_CTL_CL MT(MOD_LCTL, KC_SCLN)  // Tap for colon, hold for Control
-#define KC_SFT_Z  MT(MOD_RSFT, KC_Z)     // Tap for Z, hold for Shift
-#define KC_SFT_SL MT(MOD_RSFT, KC_SLSH)  // Tap for slash, hold for Shift
+#define KC_XXXXX   KC_NO
+#define KC_ALT_Q   MT(MOD_LALT, KC_Q)
+#define KC_L1_A    LT(_SPECIAL, KC_A)
+#define KC_CTL_Z   MT(MOD_LCTL, KC_Z)
+#define KC_L2_S    LT(_NUMBERS, KC_S)
+#define KC_L2      MO(_NUMBERS)
+#define KC_CTL_CL  MT(MOD_LCTL, KC_SCLN)
+#define KC_LBRKT   LSFT(KC_LBRC)        // {
+#define KC_RBRKT   LSFT(KC_RBRC)        // }
+#define KC_C_A_D   LCA(KC_DEL)          // Ctrl + Alt + Del
+// TODO: add another layer entrypoint for CTRL+ALT+L1 to do multi-cursors in vscode?
 
-#define KC_GUI_ESC MT(MOD_LGUI, KC_ESC)  // Tap for Esc, hold for GUI (Meta, Command, Win)
-#define KC_ALT_ENT MT(MOD_LALT, KC_ENT)  // Tap for Enter, hold for Alt (Option)
-#define KC_SYM_SPC LT(_SPECIAL, KC_SPC)  // Tap for Space, hold for Symbol layer
-#define KC_NUM_SPC LT(_NUMBERS, KC_SPC)  // Tap for Space, hold for Numbers layer
-#define KC_SFT_TAB MT(MOD_RSFT, KC_TAB)  // Tap for Tab, hold for Right Shift
-
-#define KC_CMB_TOG CMB_TOG  // A hack to allow KC_-less keycode along with KC_-ful ones
-
-    /* Combomap
-     *
-     * ,-------------------------------.      ,-------------------------------.
-     * |       |    ESC    |     |     |      |     |    ESC    |    BSLH     |
-     * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |       |   BSPC   ENT    |     |      |    LES   COLN  GRT    |       |
-     * |-------+-----+-----+-RMB-+-LMB-|      |-----+-----+-----+-----+-------|
-     * |       |   MINS    |     |     |      |    QUO   UNDR   |     |       |
-     * `-------------------------------'      `-------------------------------'
-     *            .-----------------.            .-----------------.
-     *            |     |     |     |            |     |     |     |
-     *            '-----------------'            '-----------------'
-     */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Keymap 0: Alpha layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |     Q |  W  |  E  |  R  |  T  |      |  Y  |  U  |  I  |  O  |   P   |
+     * | ALT_Q |  W  |  E  |  R  |  T  |      |  Y  |  U  |  I  |  O  |   P   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * | CTRL A|  S  |  D  |  F  |  G  |      |  H  |  J  |  K  |  L  |CTRL ; |
+     * | L1_A  | L2_S|  D  |  F  |  G  |      |  H  |  J  |  K  |  L  |CTRL ; |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * | SHFT Z|  X  |  C  |  V  |  B  |      |  N  |  M  |  <  |  >  |SHFT / |
+     * | CTL_Z |SUP_X|  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |   /   |
      * `-------------------------------'      `-------------------------------'
-     *   .------------------------------.    .----------------------.
-     *   | ESC META | ENT ALT | SPC SYM |    | SPC NUM | SHFT | TAB |
-     *   '------------------------------'    '----------------------'
+     *               .-----------------.      .-----------------.
+     *               | LSFT| SPC | BSPC|      | ENTR| TAB |SUPER|
+     *               '-----------------'      '-----------------'
      */
     [_ALPHA] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-           Q   ,  W  ,  E  ,  R  ,  T  ,         Y  ,  U  ,  I  ,  O  ,   P   ,
+         ALT_Q ,  W  ,  E  ,  R  ,  T  ,         Y  ,  U  ,  I  ,  O  ,   P   ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         CTL_A ,  S  ,  D  ,  F  ,  G  ,         H  ,  J  ,  K  ,  L  , CTL_CL,
-    // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         SFT_Z ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT , SFT_SL,
+         L1_A  , L2_S,  D  ,  F  ,  G  ,         H  ,  J  ,  K  ,  L  , CTL_CL,
+    // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------| 
+         CTL_Z ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT , SLSH  ,
     // '-------------------------------'      '-------------------------------'
-    //    .---------------------------.        .------------------------.
-            GUI_ESC, ALT_ENT, SYM_SPC ,          NUM_SPC, LSFT, SFT_TAB ),
-    //    '---------------------------'        '------------------------'
+    //               .-----------------.      .-----------------.
+                       LSFT, SPC , BSPC,        TAB , ENT ,LGUI),
+    //               '-----------------'      '-----------------'
+
 
     /* Keymap 1: Special characters layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |    !  |  @  |  {  |  }  |  |  |      |  `  |  ~  |     |     |   \   |
+     * |       |  &  |  *  |  `  |  {  |      |  }  | HOME| UP  | END |   -   
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |    #  |  $  |  (  |  )  | RMB |      |  +  |  -  |  /  |  *  |   '   |
+     * | XXXXX |  $  |  %  |  ^  |  (  |      |  )  | LEFT| DOWN| RGHT|   '   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |    %  |  ^  |  [  |  ]  | LMB |      |  &  |  =  |  ,  |  .  |   -   |
+     * |       |  !  |  @  |  #  |  [  |      |  ]  |     |     |     |       |
      * `-------------------------------'      `-------------------------------'
-     *     .-------------------------.          .-----------------.
-     *     | ComboToggle |  ;  |  =  |          |  =  |  ;  | DEL |
-     *     '-------------------------'          '-----------------'
+     *               .-----------------.      .-----------------.
+     *               | LSFT| SPC | BSPC|      | ENTR| TAB |SUPER|
+     *               '-----------------'      '-----------------'
      */
     [_SPECIAL] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-         EXLM  , AT  , LCBR, RCBR, PIPE,        GRV , TILD, TRNS, TRNS, BSLS  ,
+         XXXXX , AMPR, ASTR, GRV ,LBRKT,       RBRKT, HOME, UP  , END , MINS  ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         HASH  , DLR , LPRN, RPRN, BTN2,        PLUS, MINS, SLSH, ASTR, QUOT  ,
+         XXXXX , DLR , PERC, CIRC, LPRN,       RPRN , LEFT, DOWN, RGHT, QUOT  ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         PERC  , CIRC, LBRC, RBRC, BTN1,        AMPR, EQL , COMM, DOT , MINS  ,
+         XXXXX , EXLM,  AT , HASH, LBRC,       RBRC ,XXXXX,XXXXX,XXXXX,XXXXX  ,
     // '-------------------------------'      '-------------------------------'
-    //    .---------------------------.        .------------------------.
-            CMB_TOG, SCLN    , EQL    ,          EQL    , SCLN   , DEL  ),
-    //    '---------------------------'        '------------------------'
+    //               .-----------------.      .-----------------.
+                       LSFT, SPC , DEL ,        TAB , ENT ,LGUI),
+    //               '-----------------'      '-----------------'
 
     /* Keymap 2: Numbers/Function/Motion layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |   1   |  2  |  3  |  4  |  5  |      |  6  |  7  |  8  |  9  |   0   |
+     * |  ESC  |     |     |     |C_A_D|      |     |  7  |  8  |  9  |   -   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |  F1   | F2  | F3  | F4  | F5  |      | LFT | DWN | UP  | RGT | VOLUP |
+     * |       |XXXXX|     |     |     |      |     |  4  |  5  |  6  |   +   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |  F6   | F7  | F8  | F9  | F10 |      | MLFT| MDWN| MUP | MRGT| VOLDN |
+     * |       |     |     |     |     |      |  0  |  1  |  2  |  3  | ENTR  |
      * `-------------------------------'      `-------------------------------'
-     *             .-----------------.          .-----------------.
-     *             | F11 | F12 |     |          |     | PLY | SKP |
-     *             '-----------------'          '-----------------'
+     *               .-----------------.      .-----------------.
+     *               | LSFT| SPC | BSPC|      | ENTR| TAB |SUPER|
+     *               '-----------------'      '-----------------'
      */
     [_NUMBERS] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-           1   ,  2  ,  3  ,  4  ,  5  ,         6  ,  7  ,  8  ,  9  ,   0   ,
+          ESC  ,XXXXX,XXXXX,XXXXX,C_A_D,       XXXXX,  7  ,  8  ,  9  ,  MINS ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-           F1  ,  F2 ,  F3 ,  F4 , F5  ,        LEFT, DOWN,  UP , RGHT,  VOLU ,
+         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX,  4  ,  5  ,  6  ,  PLUS ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-           F6  ,  F7 ,  F8 ,  F9 , F10 ,        MS_L, MS_D, MS_U, MS_R,  VOLD ,
+         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,         0  ,  1  ,  2  ,  3  ,  ENT  ,
     // '-------------------------------'      '-------------------------------'
-    //    .---------------------------.        .------------------------.
-              F11  ,   F12   , TRNS   ,           TRNS  ,  MPLY ,  MNXT )
-    //    '---------------------------'        '------------------------'
+    //               .-----------------.      .-----------------.
+                       LSFT, SPC , DEL ,        TAB , ENT ,LGUI),
+    //               '-----------------'      '-----------------'
 };
