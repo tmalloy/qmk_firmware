@@ -18,6 +18,7 @@ enum {
 #define KC_L2_S    LT(_NUMBERS, KC_S)
 #define KC_L2      MO(_NUMBERS)
 #define KC_CTL_CL  MT(MOD_RCTL, KC_SCLN)
+#define KC_CTL_Z   MT(MOD_LCTL, KC_Z)
 #define KC_LBRKT   LSFT(KC_LBRC)        // {
 #define KC_RBRKT   LSFT(KC_RBRC)        // }
 #define KC_C_A_D   LCA(KC_DEL)          // Ctrl + Alt + Del
@@ -45,10 +46,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          L1_A  , L2_S,  D  ,  F  ,  G  ,         H  ,  J  ,  K  ,  L  , CTL_CL,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------| 
-           Z   ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT , SLSH  ,
+         CTL_Z   ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT , SLSH  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                       LCTL, SPC , LSFT,        TAB , ENT ,LGUI),
+                      LSFT, SPC , BSPC ,        TAB , ENT ,LGUI),
     //               '-----------------'      '-----------------'
 
 
@@ -74,13 +75,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          XXXXX , EXLM,  AT , HASH, LBRC,       RBRC ,XXXXX,XXXXX,XXXXX,  EQL  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                       LCTL, SPC , LSFT,        TAB , ENT ,LGUI),
+                      LSFT, SPC , DEL ,        TAB , ENT ,LGUI),
     //               '-----------------'      '-----------------'
 
     /* Keymap 2: Numbers/Function/Motion layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |  ESC  |     |     |     |C_A_D|      |     |  7  |  8  |  9  |   -   |
+     * |  ESC  |     |     |     |C_A_D|      |  =  |  7  |  8  |  9  |   -   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
      * |       |XXXXX|     |     |     |      |     |  4  |  5  |  6  |   +   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
@@ -92,13 +93,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_NUMBERS] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-          ESC  ,XXXXX,XXXXX,XXXXX,C_A_D,       XXXXX,  7  ,  8  ,  9  ,  MINS ,
+          ESC  ,XXXXX,XXXXX,XXXXX,C_A_D,        EQL ,  7  ,  8  ,  9  ,  MINS ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX,  4  ,  5  ,  6  ,  PLUS ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,         0  ,  1  ,  2  ,  3  ,  ENT  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                       LCTL, SPC , LSFT,        TAB , ENT ,LGUI),
+                      LSFT, SPC , BSPC ,        TAB , ENT ,  0 ),
     //               '-----------------'      '-----------------'
 };
