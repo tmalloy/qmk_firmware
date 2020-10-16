@@ -22,6 +22,9 @@ enum {
 #define KC_LBRKT   LSFT(KC_LBRC)        // {
 #define KC_RBRKT   LSFT(KC_RBRC)        // }
 #define KC_C_A_D   LCA(KC_DEL)          // Ctrl + Alt + Del
+
+#define KC_GUIL2   LT(_NUMBERS, KC_LGUI)
+
 // TODO: add another layer entrypoint for CTRL+ALT+L1 to do multi-cursors in vscode?
 #define KC_CMB_TOG CMB_TOG  // A hack to allow KC_-less keycode along with KC_-ful ones
 
@@ -44,12 +47,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ,-------------------------------.      ,-------------------------------.
          ALT_Q ,  W  ,  E  ,  R  ,  T  ,         Y  ,  U  ,  I  ,  O  ,   P   ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         L1_A  , L2_S,  D  ,  F  ,  G  ,         H  ,  J  ,  K  ,  L  , CTL_CL,
+         L1_A  ,  S  ,  D  ,  F  ,  G  ,         H  ,  J  ,  K  ,  L  , CTL_CL,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------| 
          CTL_Z   ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT , SLSH  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                      LSFT, SPC , BSPC ,        TAB , ENT ,LGUI),
+                      LSFT, SPC , BSPC ,        TAB , ENT ,GUIL2),
     //               '-----------------'      '-----------------'
 
 
@@ -81,11 +84,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Keymap 2: Numbers/Function/Motion layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |  ESC  |     |     |     |C_A_D|      |  =  |  7  |  8  |  9  |   -   |
+     * |  ESC  |  7  |  8  |  9  |C_A_D|      |  =  |  7  |  8  |  9  |   -   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |       |XXXXX|     |     |     |      |  \  |  4  |  5  |  6  |   +   |
+     * |       |  4  |  5  |  6  |     |      |  \  |  4  |  5  |  6  |   +   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |       |     |     |     |     |      |  0  |  1  |  2  |  3  | ENTR  |
+     * |   0   |  1  |  2  |  3  |     |      |  0  |  1  |  2  |  3  | ENTR  |
      * `-------------------------------'      `-------------------------------'
      *               .-----------------.      .-----------------.
      *               | LSFT| SPC | BSPC|      | ENTR| TAB |SUPER|
@@ -93,13 +96,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_NUMBERS] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-          ESC  ,XXXXX,XXXXX,XXXXX,C_A_D,        EQL ,  7  ,  8  ,  9  ,  MINS ,
+          ESC  ,  7  ,  8  ,  9  ,C_A_D,        EQL ,  7  ,  8  ,  9  ,  MINS ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,        BSLS,  4  ,  5  ,  6  ,  PLUS ,
+         XXXXX ,  4  ,  5  ,  6  ,XXXXX,        BSLS,  4  ,  5  ,  6  ,  PLUS ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,         0  ,  1  ,  2  ,  3  ,  ENT  ,
+            0  ,  1  ,  2  ,  3  ,XXXXX,         0  ,  1  ,  2  ,  3  ,  ENT  ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
-                      LSFT, SPC , BSPC ,        TAB , ENT ,  0 ),
+                      LSFT, SPC , BSPC ,        TAB , ENT ,XXXXX),
     //               '-----------------'      '-----------------'
 };
