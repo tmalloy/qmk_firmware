@@ -1,3 +1,11 @@
+# tbm
+
+Compile:
+```qmk compile -kb gboards/gergoplex -km tmalloy```
+
+Put keyboard into flash mode and flash:
+```qmk flash -kb gboards/gergoplex -km tmalloy```
+
 # Quantum Mechanical Keyboard Firmware
 
 [![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
