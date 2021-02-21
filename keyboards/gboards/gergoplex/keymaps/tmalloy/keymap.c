@@ -9,7 +9,7 @@
 enum {
     _ALPHA,   // default
     _OVERFLOW, // numbers/function/motion
-    _SPECIAL,  // special characters, media keys, etc. 
+    _SPECIAL,  // special characters, media keys, etc.
     _DVORAK
 };
 
@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          ALT_Q ,  W  ,  E  ,  R  ,  T  ,         Y  ,  U  ,  I  ,  O  , ALT_P ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          CTL_A ,  S  ,  D  ,  F  ,  G  ,         H  ,  J  ,  K  ,  L  , CTL_CL,
-    // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------| 
+    // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          SFT_Z ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT ,SFT_SLSH,
     // '-------------------------------'      '-------------------------------'
     //           .---------------------.      .-----------------------.
@@ -103,11 +103,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //           '---------------------'      '-----------------------'
 
 
-    // ~ ?  
+    // ~ ?
     /* Keymap 1: Special characters layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |   !   |  @  |  #  |  $  |  %  |      |  +  |  7  |  8  |  9  |   *   
+     * |   !   |  @  |  #  |  $  |  %  |      |  +  |  7  |  8  |  9  |   *
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
      * |   ^   |  &  |  [  |  (  |  {  |      |  -  |  4  |  5  |  6  |   "   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
@@ -135,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,-------------------------------.      ,-------------------------------.
      * |       |     |     |     |     |      |     | mute|vol_u|vol_d|       |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |       |     |     |     |     |      |     | last| play| next|       |
+     * |       |     |     |     |     |      | left| down|  up |right|       |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |       |     |     |     |     |      |     |     |     |     |       |
+     * |       |     |     |     |     |      |     | last| play| next|       |
      * `-------------------------------'      `-------------------------------'
      *               .-----------------.      .-----------------.
      *               |     |     |     |      |     |     |     |
@@ -145,11 +145,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_SPECIAL] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX, MUTE, VOLD, VOLU,XXXXX,
+         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX, MUTE, VOLD, VOLU, XXXXX ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX, MPRV, MPLY, MNXT,XXXXX,
+         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,        LEFT, DOWN,  UP ,RIGHT, XXXXX ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX,XXXXX,XXXXX,XXXXX,XXXXX,
+         XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX, MPRV, MPLY, MNXT, XXXXX ,
     // '-------------------------------'      '-------------------------------'
     //               .-----------------.      .-----------------.
                       XXXXX,XXXXX,XXXXX,       XXXXX,XXXXX,XXXXX),
@@ -180,4 +180,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    QWRT, LGUI , L1_BSPC,       L1_SPC, TAB ,L2_GRV),
     //           '---------------------'      '--------------------'
 };
-
