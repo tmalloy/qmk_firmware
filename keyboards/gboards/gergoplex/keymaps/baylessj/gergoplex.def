@@ -1,0 +1,10 @@
+// Gergoplex specfic combos 
+
+COMB(op_underscore,    KC_UNDS, KC_O,    KC_P)
+COMB(io_minus,         KC_MINS, KC_I,    KC_O)
+COMB(kl_equals,        KC_EQL,  KC_K,    KC_L)
+COMB(jk_quote,         KC_QUOT, KC_J,    KC_K)
+COMB(dotsls_bsls,      KC_BSLS, KC_DOT,  KC_SLSH)
+COMB(comdot_plus,      KC_PLUS, KC_COMM, KC_DOT)
+COMB(we_grave,         KC_GRV,  KC_E,    KC_W)
+COMB(er_escape,        KC_ESC,  KC_R,    KC_E)
