@@ -88,6 +88,17 @@ enum {
 //  fnx_inverting = false;
 //}
 
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case KC_ALT_Q:
+        return true;
+    case KC_ALT_P:
+        return true;
+    default:
+        return false;
+    }
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Keymap 0: Alpha layer
      *
