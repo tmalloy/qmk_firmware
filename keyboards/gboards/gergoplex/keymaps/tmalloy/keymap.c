@@ -32,9 +32,7 @@ enum {
 #define KC_L2_K     LT(_SPECIAL, KC_K)
 #define KC_L3_S     LT(_NUMBERS, KC_S)
 #define KC_SFT_Z    MT(MOD_LSFT, KC_Z)
-#define KC_SFT_SLSH MT(MOD_RSFT, KC_SLSH)
-#define KC_ALT_Q   MT(MOD_LALT, KC_Q)
-#define KC_ALT_P   MT(MOD_RALT, KC_P)
+#define KC_SFT_SLSH MT(MOD_LSFT, KC_SLSH)
 
 //dvorak
 #define KC_L1_U     LT(_SYMBOLS, KC_U)
@@ -42,12 +40,13 @@ enum {
 #define KC_L2_E     LT(_SPECIAL, KC_E)
 #define KC_L2_T     LT(_SPECIAL, KC_T)
 #define KC_L3_O     LT(_NUMBERS, KC_O)
-#define KC_SFT_SCLN MT(MOD_LSFT, KC_SCLN)
-#define KC_ALT_QUOT MT(MOD_LALT, KC_QUOT)
-#define KC_ALT_L    MT(MOD_RALT, KC_L)
 
-#define KC_LGUI_ENT MT(MOD_LGUI, KC_ENT)
-#define KC_CTRL_TAB MT(MOD_LCTL, KC_TAB)
+#define KC_SFT_ESC  MT(MOD_LSFT, KC_ESC)
+#define KC_CTL_TAB  MT(MOD_LCTL, KC_TAB)
+#define KC_GUI_BSPC MT(MOD_LGUI, KC_BSPC)
+#define KC_GUI_SPC  MT(MOD_LGUI, KC_SPC)
+#define KC_ALT_ENT  MT(MOD_LALT, KC_ENT)
+#define KC_SFT_GRV  MT(MOD_LSFT, KC_GRV)
 
 #define KC_LBRKT    LSFT(KC_LBRC)        // {
 #define KC_RBRKT    LSFT(KC_RBRC)        // }
@@ -88,42 +87,42 @@ enum {
 //  fnx_inverting = false;
 //}
 
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case KC_ALT_Q:
-        return true;
-    case KC_ALT_P:
-        return true;
-    default:
-        return false;
-    }
-}
+//bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+//    switch (keycode) {
+//    case KC_ALT_Q:
+//        return true;
+//    case KC_ALT_P:
+//        return true;
+//    default:
+//        return false;
+//    }
+//}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Keymap 0: Alpha layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * | ALT_Q |  W  |  E  |  R  |  T  |      |  Y  |  U  |  I  |  O  | ALT_P |
+     * |   Q   |  W  |  E  |  R  |  T  |      |  Y  |  U  |  I  |  O  |   P   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * | CTL_A | L3_S| L2_D| L1_F|  G  |      |  H  | L1_J| L2_K|  L  | CTRL_;|
+     * |   A   | L3_S| L2_D| L1_F|  G  |      |  H  | L1_J| L2_K|  L  |   ;   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
      * | SFT_Z |  X  |  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  | SFT_/ |
      * `-------------------------------'      `-------------------------------'
-     *               '-----------------'      '---------------------'
-     *               |TAB|CMD_ENT|BSPS |      | SPC | CTRL_TAB|  `  |
-     *               '-----------------'      '---------------------'
+     *      '--------------------------'      '-------------------------'
+     *      | GRV | CTL_TAB | GUI_BSPC |      | GUI_SPC | ALT_ENT | ESC |
+     *      '--------------------------'      '-------------------------'
      */
     [_ALPHA] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-         ALT_Q ,  W  ,  E  ,  R  ,  T  ,         Y  ,  U  ,  I  ,  O  , ALT_P ,
+           Q   ,  W  ,  E  ,  R  ,  T  ,         Y  ,  U  ,  I  ,  O  ,   P   ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-           A   , L3_S, L2_D, L1_F,  G  ,         H  , L1_J, L2_K,  L  , SCLN  ,
+           A   , L3_S, L2_D, L1_F,  G  ,         H  , L1_J, L2_K,  L  ,  SCLN ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          SFT_Z ,  X  ,  C  ,  V  ,  B  ,         N  ,  M  ,COMMA, DOT ,SFT_SLSH,
     // '-------------------------------'      '-------------------------------'
-    //           .---------------------.      .-----------------------.
-                   TAB, LGUI_ENT, BSPC ,         SPC , CTRL_TAB , GRV),
-    //           '---------------------'      '-----------------------'
+    //      .--------------------------.      .--------------------------.
+              GRV , CTL_TAB , GUI_BSPC ,        GUI_SPC , ALT_ENT , ESC ),
+    //      '--------------------------'      '--------------------------'
 
 
 
@@ -137,9 +136,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
      * |   \   |  |  |     |     |     |      |     |     |     |  ?  |   /   |
      * `-------------------------------'      `-------------------------------'
-     *               .-----------------.      .--------------------.
-     *               |TAB|CMD_ENT|BSPS |      | SPC |CTRL_TAB|  `  |
-     *               '-----------------'      '--------------------'
+     *      '--------------------------'      '-------------------------'
+     *      | GRV | CTL_TAB | GUI_BSPC |      | GUI_SPC | ALT_ENT | ESC |
+     *      '--------------------------'      '-------------------------'
      */
     //! @ # $ % ^ & * ( ) [ ] { } - _ = + \ | ` ~ ' "
     // \ | _ ~
@@ -151,9 +150,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          BSLS  , PIPE,XXXXX,XXXXX,XXXXX,       XXXXX,XXXXX,XXXXX, QST ,  SLSH ,
     // '-------------------------------'      '-------------------------------'
-    //           .---------------------.      .-----------------------.
-                    TAB, LGUI_ENT, BSPC ,         SPC , CTRL_TAB , GRV),
-    //           '---------------------'      '-----------------------'
+    //      .--------------------------.      .--------------------------.
+              GRV , CTL_TAB , GUI_BSPC ,        GUI_SPC , ALT_ENT , ESC ),
+    //      '--------------------------'      '--------------------------'
 
     // ~ ?
     /* Keymap 1: Special characters layer
@@ -165,9 +164,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
      * |       |     |     |     |     |      |  0  |  1  |  2  |  3  |   .   |
      * `-------------------------------'      `-------------------------------'
-     *               .-----------------.      .----------------------.
-     *               |TAB|CMD_ENT|BSPS |      | SPC | CTRL_TAB |  `  |
-     *               '-----------------'      '----------------------'
+     *      '--------------------------'      '-------------------------'
+     *      | GRV | CTL_TAB | GUI_BSPC |      | GUI_SPC | ALT_ENT | ESC |
+     *      '--------------------------'      '-------------------------'
      */
     //! @ # $ % ^ & * ( ) [ ] { } - _ = + \ | ` ~ ' "
     [_NUMBERS] = LAYOUT_kc(
@@ -178,9 +177,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,         0  ,  1  ,  2  ,  3  ,  DOT  ,
     // '-------------------------------'      '-------------------------------'
-    //           .---------------------.      .-----------------------.
-                    TAB, LGUI_ENT, BSPC ,         SPC , CTRL_TAB , GRV),
-    //           '---------------------'      '-----------------------'
+    //      .--------------------------.      .--------------------------.
+              GRV , CTL_TAB , GUI_BSPC ,        GUI_SPC , ALT_ENT , ESC ),
+    //      '--------------------------'      '--------------------------'
 
     /* Keymap 2: Numbers/Function/Motion layer
      *
@@ -191,9 +190,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
      * |       |     |     |     |     |      |     |     |     |     |       |
      * `-------------------------------'      `-------------------------------'
-     *               '-----------------'      '---------------------'
-     *               |TAB|CMD_ENT|BSPS |      | SPC | CTRL_TAB|  `  |
-     *               '-----------------'      '---------------------'
+     *      '--------------------------'      '-------------------------'
+     *      | GRV | CTL_TAB | GUI_BSPC |      | GUI_SPC | ALT_ENT | ESC |
+     *      '--------------------------'      '-------------------------'
      */
     [_SPECIAL] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
@@ -203,9 +202,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX,XXXXX,XXXXX,XXXXX, XXXXX ,
     // '-------------------------------'      '-------------------------------'
-    //           .---------------------.      .-----------------------.
-                    TAB, LGUI_ENT, BSPC ,         SPC , CTRL_TAB , GRV),
-    //           '---------------------'      '-----------------------'
+    //      .--------------------------.      .--------------------------.
+              GRV , CTL_TAB , GUI_BSPC ,        GUI_SPC , ALT_ENT , ESC ),
+    //      '--------------------------'      '--------------------------'
 
 
    /* Keymap 3: Dvorak
@@ -217,19 +216,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
     * |   ;   |  q  |  j  |  k  |  x  |      |  b  |  m  |  w  |  v  |   z   |
     * `-------------------------------'      `-------------------------------'
-    *               .-----------------.      .--------------------.
-    *               |TAB|CMD_ENT|BSPS |      | SPC |CTRL_TAB|  `  |
-    *               '-----------------'      '--------------------'
+    *      '--------------------------'      '-------------------------'
+    *      | GRV | CTL_TAB | GUI_BSPC |      | GUI_SPC | ALT_ENT | ESC |
+    *      '--------------------------'      '-------------------------'
     */
    [_DVORAK] = LAYOUT_kc(
    // ,-------------------------------.      ,-------------------------------.
-      ALT_QUOT,COMMA, DOT ,  P  ,  Y  ,         F  ,  G  ,  C  ,  R  , ALT_L ,
+         QUOT,COMMA, DOT ,  P  ,  Y  ,         F  ,  G  ,  C  ,  R  ,   L ,
    // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
            A  , L3_O, L2_E, L1_U,  I  ,         D  , L1_H, L2_T,  N  ,   S   ,
    // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-       SFT_SCLN, Q  ,  J  ,  K  ,  X  ,         B  ,  M  ,  W  ,  V  , SFT_Z ,
+         SCLN, Q  ,  J  ,  K  ,  X  ,         B  ,  M  ,  W  ,  V  ,    Z ,
    // '-------------------------------'      '-------------------------------'
-   //           .---------------------.      .-----------------------.
-                  TAB, LGUI_ENT, BSPC ,         SPC , CTRL_TAB , GRV),
-   //           '---------------------'      '-----------------------'
+   //      .--------------------------.      .--------------------------.
+             GRV , CTL_TAB , GUI_BSPC ,        GUI_SPC , ALT_ENT , ESC ),
+   //      '--------------------------'      '--------------------------'
 };
