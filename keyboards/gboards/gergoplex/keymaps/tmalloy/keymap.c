@@ -196,9 +196,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_SPECIAL] = LAYOUT_kc(
     // ,-------------------------------.      ,-------------------------------.
-          QWRT , MUTE, VOLD, VOLU,XXXXX,       XXXXX,XXXXX,XXXXX,XXXXX, XXXXX ,
+         XXXXX , MUTE, VOLD, VOLU,XXXXX,       XXXXX,XXXXX,XXXXX,XXXXX, XXXXX ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-          DVRK , MPRV, MPLY, MNXT,XXXXX,        LEFT, DOWN,  UP ,RIGHT, XXXXX ,
+         XXXXX , MPRV, MPLY, MNXT,XXXXX,        LEFT, DOWN,  UP ,RIGHT, XXXXX ,
     // |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
          XXXXX ,XXXXX,XXXXX,XXXXX,XXXXX,       XXXXX,XXXXX,XXXXX,XXXXX, XXXXX ,
     // '-------------------------------'      '-------------------------------'
